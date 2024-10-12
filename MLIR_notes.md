@@ -14,8 +14,11 @@
     - Loop partial unrolling refers to duplicating a loop body by combining two iterations into one and cutting down the need for an extra iteration, but not necessarily removing the need for the loop
 - **Loop flattening** - technique to optimise nested loops by simplifying it into a single loop
     - Done in cases where loops may be independent or if indices can be mapped in a more straightforward way
-- **Anchoring** - 
-
+- **Abstract Syntax Tree** - Tree representation of a program that is syntax agnostic
+- **Pattern Rewriting** - allows repeatedly applying transformations to an IR substructure until that substructure is removed
+    - Rewrite patterns are subclasses of the OpRewritePattern class
+    - Pattern matching and transformations are done by the matchAndRewrite method, which returns a wrapper around a boolean indicating success/failure
+    - Multiple patterns can be applied in one pass if they are collected in a PatternSet, where the benefit argument determines the order patterns are applied in
 
 ## Utilities
 
@@ -28,4 +31,7 @@
     // CHECK: %0 = "some.op"{} : {} -> i32
     - Asserts using regex
     - Configured with a DSL that consists of CHECK-[SOMETHING] commands
+- **walk** - traverses the abstract syntax tree of a program
+    - May have to be used for transformations over the pattern rewrite engine if the transformation is not local
+    - More difficult than pattern rewriting
 
